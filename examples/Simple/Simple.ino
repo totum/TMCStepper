@@ -6,9 +6,9 @@
 
 #include <TMCStepper.h>
 
-#define EN_PIN           38 // Enable
-#define DIR_PIN          55 // Direction
-#define STEP_PIN         54 // Step
+#define EN_PIN           62 // Enable
+#define DIR_PIN          48 // Direction
+#define STEP_PIN         46 // Step
 #define CS_PIN           42 // Chip select
 #define SW_MOSI          66 // Software Master Out Slave In (MOSI)
 #define SW_MISO          44 // Software Master In Slave Out (MISO)
@@ -47,17 +47,16 @@ void setup() {
 
                                   // Enable one according to your setup
 //SPI.begin();                    // SPI drivers
-//SERIAL_PORT.begin(115200);      // HW UART drivers
+//  SERIAL_PORT.begin(115200);      // HW UART drivers
 //driver.beginSerial(115200);     // SW UART drivers
 
-  driver.begin();                 //  SPI: Init CS pins and possible SW SPI pins
-                                  // UART: Init SW UART (if selected) with default 115200 baudrate
-  driver.toff(5);                 // Enables driver in software
+  driver.begin();
+
+  driver.toff(6);                 // Enables driver in software
+  //driver.en_spreadCycle(false);   // Toggle spreadCycle on TMC2208/2209/2224
   driver.rms_current(600);        // Set motor RMS current
   driver.microsteps(16);          // Set microsteps to 1/16th
 
-//driver.en_pwm_mode(true);       // Toggle stealthChop on TMC2130/2160/5130/5160
-//driver.en_spreadCycle(false);   // Toggle spreadCycle on TMC2208/2209/2224
   driver.pwm_autoscale(true);     // Needed for stealthChop
 }
 
